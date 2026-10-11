@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devocional 30 Dias - Charmila Elija</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap');
+  body{margin:0;font-family:'Inter',sans-serif;background:#fdf4eb;color:#3a2a2a}
+  header{background:#8b4545;color:white;text-align:center;padding:40px 20px}
+  header h1{font-family:'Playfair Display',serif;font-size:32px;margin:0}
+ .nome-badge{background:white;color:#8b4545;padding:8px 18px;border-radius:20px;display:inline-block;margin-top:15px;font-weight:600}
+ .container{max-width:700px;margin:0 auto;padding:20px}
+ .menu{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:20px 0}
+ .menu button{border:1px solid #dccbb5;background:white;padding:10px;border-radius:8px;cursor:pointer;font-weight:600}
+ .menu button.active,.menu button:hover{background:#8b4545;color:white}
+ .card{background:white;border:1px solid #e6d5c0;border-radius:16px;padding:28px;box-shadow:0 4px 12px rgba(0,0,0,0.05)}
+ .card h2{font-family:'Playfair Display',serif;color:#8b4545}
+ .versiculo{color:#8b4545;font-weight:600}
+ .bloco{background:#fdf4eb;border-left:4px solid #8b4545;padding:12px 16px;border-radius:8px;margin:18px 0}
+ .label{font-size:11px;text-transform:uppercase;color:#8b4545;font-weight:700}
+ .nav{display:flex;justify-content:space-between;margin-top:20px}
+ .nav button{background:#8b4545;color:white;border:none;padding:12px 20px;border-radius:8px;cursor:pointer;font-weight:600}
+ .progress{height:6px;background:#e6d5c0;border-radius:6px;overflow:hidden;margin:15px 0}
+ .progress div{height:100%;background:#8b4545}
+</style>
+</head>
+<body>
+<header>
+  <h1>30 DIAS DE DECLARAÇÕES & ORAÇÕES</h1>
+  <p>Eu sou quem Deus diz que eu sou</p>
+  <div class="nome-badge">Personalizado para Charmila Elija</div>
+</header>
+<div class="container">
+  <div class="progress"><div id="barra"></div></div>
+  <div class="menu" id="menu"></div>
+  <div class="card" id="card"></div>
+  <div class="nav">
+    <button onclick="mudar(-1)">← Anterior</button>
+    <button onclick="mudar(1)">Próximo →</button>
+  </div>
+</div>
+<script>
+const devocional = [
+  {t:"Dia 1 - Eu sou amada e escolhida", v:"Efésios 1:4", d:"Sou escolhida, amada e aceita por Deus. Não sou um erro.", o:"Pai, obrigada por me escolher. Me faz sentir teu amor hoje. Amém."},
+  {t:"Dia 2 - Eu tenho paz", v:"Filipenses 4:7", d:"Tenho paz. A ansiedade não me domina.", o:"Senhor, guarda minha mente com tua paz."},
+  {t:"Dia 3 - Eu sou forte", v:"Isaías 41:10", d:"Sou forte e corajosa. Não vou desistir.", o:"Deus, quando sou fraca, tu és minha força."},
+  {t:"Dia 4 - Meu futuro é de esperança", v:"Jeremias 29:11", d:"Meu futuro é de paz e esperança.", o:"Pai, confio nos teus planos."},
+  {t:"Dia 5 - Eu sou perdoada", v:"1 João 1:9", d:"Sou perdoada. Não carrego culpa.", o:"Obrigada pelo perdão, Jesus."},
+  {t:"Dia 6 - Sou mais que vencedora", v:"Romanos 8:37", d:"Sou mais que vencedora.", o:"Senhor, me dá vitória hoje."},
+  {t:"Dia 7 - Sou grata", v:"Salmos 103:2", d:"Sou abençoada e grata.", o:"Obrigada por tudo, Pai."},
+  {t:"Dia 8 - Sou curada", v:"Isaías 53:5", d:"Minhas feridas estão sendo curadas.", o:"Cura meu coração."},
+  {t:"Dia 9 - Tenho alegria", v:"Neemias 8:10", d:"A alegria do Senhor é minha força.", o:"Enche-me de alegria."},
+  {t:"Dia 10 - Sou confiante", v:"Salmos 27:1", d:"O Senhor é minha luz.", o:"Tira o medo de mim."},
+  {t:"Dia 11 - Tenho sabedoria", v:"Tiago 1:5", d:"Deus me dá sabedoria.", o:"Me guia nas decisões."},
+  {t:"Dia 12 - Sou paciente", v:"Salmos 40:1", d:"Espero no Senhor.", o:"Ensina-me a esperar."},
+  {t:"Dia 13 - Amada incondicionalmente", v:"Romanos 8:38-39", d:"Nada me separa do amor de Deus.", o:"Obrigada por nunca me deixar."},
+  {t:"Dia 14 - Tenho domínio próprio", v:"2 Timóteo 1:7", d:"Tenho equilíbrio.", o:"Domina minhas emoções."},
+  {t:"Dia 15 - Criada com propósito", v:"Efésios 2:10", d:"Sou obra-prima de Deus.", o:"Mostra-me meu propósito."},
+  {t:"Dia 16 - Sou guiada", v:"Salmos 32:8", d:"Deus me guia.", o:"Guia meus passos."},
+  {t:"Dia 17 - Nada me faltará", v:"Salmos 23:1", d:"Nada me faltará.", o:"Supre minhas necessidades."},
+  {t:"Dia 18 - Sou renovada", v:"2 Coríntios 5:17", d:"Sou nova criatura.", o:"Renova minha mente."},
+  {t:"Dia 19 - Tenho fé", v:"Mateus 17:20", d:"Minha fé move montanhas.", o:"Aumenta minha fé."},
+  {t:"Dia 20 - Sou resiliente", v:"Salmos 46:1", d:"Deus é meu refúgio.", o:"Me sustenta."},
+  {t:"Dia 21 - Cheia do Espírito", v:"Atos 1:8", d:"Tenho poder e ousadia.", o:"Enche-me com teu Espírito."},
+  {t:"Dia 22 - Sou luz", v:"Mateus 5:14", d:"Minha luz brilha.", o:"Que eu ilumine hoje."},
+  {t:"Dia 23 - Abençoada para abençoar", v:"Gênesis 12:2", d:"Minha vida abençoa outros.", o:"Usa-me para abençoar."},
+  {t:"Dia 24 - Minhas palavras têm poder", v:"Provérbios 18:21", d:"Falo vida e benção.", o:"Que minha boca fale vida."},
+  {t:"Dia 25 - Sou próspera", v:"Salmos 1:3", d:"Tudo que faço prospera.", o:"Abençoa meu trabalho."},
+  {t:"Dia 26 - Meu lar tem paz", v:"Josué 24:15", d:"Meu lar serve ao Senhor.", o:"Traz paz ao meu lar."},
+  {t:"Dia 27 - Corajosa para recomeçar", v:"Deuteronômio 31:6", d:"Deus nunca me deixa.", o:"Me dá coragem."},
+  {t:"Dia 28 - Curada no corpo", v:"Êxodo 15:26", d:"Deus é meu médico.", o:"Toca minha saúde."},
+  {t:"Dia 29 - Protegida", v:"Salmos 91:11", d:"Anjos me guardam.", o:"Me protege hoje."},
+  {t:"Dia 30 - Infinitamente amada", v:"Sofonias 3:17", d:"Deus se alegra em mim.", o:"Obrigada por me amar tanto."}
+];
+let atual=0; const menu=document.getElementById('menu'); const card=document.getElementById('card'); const barra=document.getElementById('barra');
+devocional.forEach((item,i)=>{ const b=document.createElement('button'); b.innerText='Dia '+(i+1); b.onclick=()=>mostrar(i); menu.appendChild(b); });
+function mostrar(i){ atual=i; const item=devocional[i]; card.innerHTML=`<h2>${item.t}</h2><div class="versiculo">📖 ${item.v}</div><div class="bloco"><div class="label">Declaração</div><div><strong>${item.d}</strong><br><br>Declare 3x hoje, Charmila!</div></div><div class="bloco"><div class="label">Oração</div><div>${item.o}</div></div><div style="font-size:12px;color:#8b4545">✨ Para Charmila Elija</div>`; document.querySelectorAll('.menu button').forEach((b,idx)=>b.classList.toggle('active', idx===i)); barra.style.width=((i+1)/30*100)+'%'; }
+function mudar(dir){ let novo=atual+dir; if(novo<0) novo=29; if(novo>29) novo=0; mostrar(novo); }
+mostrar(0);
+</script>
+</body>
+</html>
